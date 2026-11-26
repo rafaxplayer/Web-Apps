@@ -308,34 +308,28 @@
     }
 
     .app-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
     }
 
     .app-card {
-      display: flex;
+      display: grid;
       min-width: 0;
-      flex-direction: column;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 15px;
-      background: var(--card);
-      box-shadow: 0 5px 20px rgba(23,37,45,.035);
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-
-    .app-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 35px rgba(23,37,45,.09);
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 64px;
+      padding: 22px 0 38px;
+      border-bottom: 1px solid var(--line);
     }
 
     .app-preview {
       position: relative;
       display: grid;
-      height: 190px;
+      height: 440px;
       overflow: hidden;
       place-items: center;
+      border-radius: 18px;
       background: #e8f0ed;
     }
 
@@ -343,16 +337,19 @@
     .app-card:nth-child(3) .app-preview { background: #f5e9e0; }
 
     .app-preview img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform .35s ease;
+      width: auto;
+      height: calc(100% - 32px);
+      max-width: 82%;
+      border: 6px solid #17252d;
+      border-radius: 20px;
+      background: #17252d;
+      object-fit: contain;
+      box-shadow: 0 18px 38px rgba(23,37,45,.22);
     }
-
-    .app-card:hover .app-preview img { transform: scale(1.035); }
 
     .app-location {
       position: absolute;
+      z-index: 1;
       top: 13px;
       left: 13px;
       padding: 7px 10px;
@@ -366,42 +363,36 @@
       backdrop-filter: blur(8px);
     }
 
+    .app-title {
+      margin: 0;
+      font-size: clamp(26px, 3vw, 36px);
+      font-weight: 750;
+      letter-spacing: -.055em;
+      line-height: 1.2;
+    }
+
     .app-info {
       display: flex;
-      flex: 1;
       flex-direction: column;
-      padding: 21px 20px 19px;
+      align-items: flex-start;
+      max-width: 440px;
     }
 
-    .app-index {
-      margin: 0 0 9px;
-      color: #879398;
-      font-size: 10px;
-      font-weight: 750;
-      letter-spacing: .12em;
-    }
-
-    h3 {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: -.04em;
-      line-height: 1.25;
-    }
+    .app-card:nth-child(even) .app-preview { order: 2; }
+    .app-card:nth-child(even) .app-info { order: 1; }
 
     .app-description {
-      min-height: 66px;
-      margin: 10px 0 17px;
+      margin: 15px 0 22px;
       color: var(--muted);
-      font-size: 12px;
-      line-height: 1.65;
+      font-size: 14px;
+      line-height: 1.75;
     }
 
     .feature-list {
       display: flex;
       flex-wrap: wrap;
       gap: 7px;
-      margin: auto 0 20px;
+      margin: 0 0 25px;
     }
 
     .feature-list span {
@@ -417,11 +408,12 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      min-height: 43px;
-      padding: 0 13px;
+      width: min(250px, 100%);
+      min-height: 48px;
+      padding: 0 15px;
       border: 1px solid #dfe5df;
       border-radius: 8px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       text-decoration: none;
       transition: border-color .2s ease, background .2s ease;
@@ -450,9 +442,8 @@
 
     @media (max-width: 850px) {
       .hero-content { gap: 25px; }
-      .app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .app-card:last-child { grid-column: 1 / -1; }
-      .app-card:last-child .app-preview { height: 220px; }
+      .app-card { grid-template-columns: .9fr 1.1fr; gap: 30px; }
+      .app-preview { height: 390px; }
     }
 
     @media (max-width: 600px) {
@@ -472,10 +463,14 @@
       .apps-section { padding: 62px 0 66px; }
       .section-heading { align-items: start; flex-direction: column; gap: 12px; margin-bottom: 23px; }
       .section-note { max-width: 340px; }
-      .app-grid { grid-template-columns: 1fr; gap: 14px; }
-      .app-card:last-child { grid-column: auto; }
-      .app-card .app-preview, .app-card:last-child .app-preview { height: 190px; }
-      .app-description { min-height: 0; }
+      .app-grid { gap: 12px; }
+      .app-card { grid-template-columns: 1fr; gap: 0; padding: 18px 0 30px; }
+      .app-card:nth-child(even) .app-preview,
+      .app-card:nth-child(even) .app-info { order: initial; }
+      .app-preview { height: 380px; }
+      .app-info { padding: 23px 2px 0; }
+      .app-title { font-size: 28px; }
+      .app-description { margin: 12px 0 18px; }
       .footer-inner { align-items: start; flex-direction: column; }
     }
 
@@ -536,12 +531,11 @@
       <div class="app-grid">
         <article class="app-card">
           <div class="app-preview">
-            <img src="https://play-lh.googleusercontent.com/A9tfJ0MPgNORHcOeAytUJKYIij-PZMMY3EtTYZNILTZ4RMwwl0P3aKDOKpQWKXmrXzks5iYHw_z6xuI-om4Qrg=w526-h296" alt="Vista de TMB Driver Assistance App" loading="lazy">
+            <img src="https://play-lh.googleusercontent.com/A9tfJ0MPgNORHcOeAytUJKYIij-PZMMY3EtTYZNILTZ4RMwwl0P3aKDOKpQWKXmrXzks5iYHw_z6xuI-om4Qrg=w1080-h608" alt="Captura de pantalla de TMB Nav" loading="lazy">
             <span class="app-location">BARCELONA · TMB</span>
           </div>
           <div class="app-info">
-            <p class="app-index">APP 01 / BARCELONA</p>
-            <h3>TMB Driver Assistance</h3>
+            <h3 class="app-title">TMB Nav</h3>
             <p class="app-description">Sigue las líneas de autobús de Barcelona con ayuda de navegación GPS y consulta el recorrido y sus paradas.</p>
             <div class="feature-list"><span>GPS y navegación</span><span>Líneas y paradas</span></div>
             <a class="store-link" href="https://play.google.com/store/apps/details?id=com.tmbnav.app" target="_blank" rel="noopener noreferrer">
@@ -552,12 +546,11 @@
 
         <article class="app-card">
           <div class="app-preview">
-            <img src="https://play-lh.googleusercontent.com/zSPBetZpRiWqEelg1JCRFMagqVsY9NMT8rVdBL3CfiWOiRmh28amFMO8un73UY2St-fyjSG2MRRNCclivpBRqA=w526-h296" alt="Vista de BCN Bus Nav" loading="lazy">
+            <img src="https://play-lh.googleusercontent.com/zSPBetZpRiWqEelg1JCRFMagqVsY9NMT8rVdBL3CfiWOiRmh28amFMO8un73UY2St-fyjSG2MRRNCclivpBRqA=w1080-h608" alt="Captura de pantalla de BCN Bus Nav" loading="lazy">
             <span class="app-location">BARCELONA · AMB</span>
           </div>
           <div class="app-info">
-            <p class="app-index">APP 02 / BARCELONA</p>
-            <h3>BCN Bus Nav</h3>
+            <h3 class="app-title">BCN Bus Nav</h3>
             <p class="app-description">Asistencia en ruta para conductores: consulta líneas y paradas, y mantente al tanto de los avisos del servicio.</p>
             <div class="feature-list"><span>GPS en ruta</span><span>Paradas y avisos</span></div>
             <a class="store-link" href="https://play.google.com/store/apps/details?id=com.jrs.bcnbusnav" target="_blank" rel="noopener noreferrer">
@@ -568,12 +561,11 @@
 
         <article class="app-card">
           <div class="app-preview">
-            <img src="https://play-lh.googleusercontent.com/nIMsL_VsgxfUpGy_TyRx4FZqMHp95GozeUNcsxcacHT9aoWVc0b_v7ML-40eg5hHea9XwyKMFivz9rRBb-zbaIk=w526-h296" alt="Vista de Driver Bus Madrid" loading="lazy">
+            <img src="https://play-lh.googleusercontent.com/nIMsL_VsgxfUpGy_TyRx4FZqMHp95GozeUNcsxcacHT9aoWVc0b_v7ML-40eg5hHea9XwyKMFivz9rRBb-zbaIk=w1080-h608" alt="Captura de pantalla de Driver Bus Madrid" loading="lazy">
             <span class="app-location">MADRID</span>
           </div>
           <div class="app-info">
-            <p class="app-index">APP 03 / MADRID</p>
-            <h3>Driver Bus Madrid</h3>
+            <h3 class="app-title">Driver Bus Madrid</h3>
             <p class="app-description">Sigue los recorridos de Madrid, localiza paradas y consulta avisos e incidencias del servicio.</p>
             <div class="feature-list"><span>Rutas y paradas</span><span>Avisos de servicio</span></div>
             <a class="store-link" href="https://play.google.com/store/apps/details?id=com.driverbusmadrid.app" target="_blank" rel="noopener noreferrer">
@@ -588,7 +580,7 @@
   <footer class="footer">
     <div class="wrap footer-inner">
       <p>© <span id="year">2026</span> Driver Hub · Aplicaciones independientes para conductores.</p>
-      <p>Las apps no están afiliadas a las entidades de transporte mencionadas.</p>
+      <p><a href="mailto:jrs.info72@gmail.com?subject=Sugerencias%20y%20contacto">Sugerencias y contacto</a> · Las apps no están afiliadas a las entidades de transporte mencionadas.</p>
     </div>
   </footer>
   <script>
