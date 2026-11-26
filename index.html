@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a22">
+  <meta name="description" content="Descubre las aplicaciones de navegación y asistencia para conductores de autobús en Barcelona y Madrid.">
+  <title>Driver Hub — Apps para conductores</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17252d;
+      --muted: #64737a;
+      --paper: #f5f6f2;
+      --card: #fff;
+      --line: #e6e9e4;
+      --night: #101a22;
+      --mint: #c9f277;
+      --blue: #a9d8fa;
+      --orange: #ffb28e;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 580px;
+      color: #f7faf6;
+      background:
+        radial-gradient(ellipse at 82% 12%, rgba(201, 242, 119, .13), transparent 34%),
+        var(--night);
+    }
+
+    .hero::after {
+      position: absolute;
+      right: -210px;
+      bottom: -450px;
+      width: 720px;
+      height: 720px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 50%;
+      box-shadow: 0 0 0 48px rgba(255,255,255,.025), 0 0 0 96px rgba(255,255,255,.02);
+      content: "";
+      pointer-events: none;
+    }
+
+    .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+
+    .topbar {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 84px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: #f7faf6;
+      font-size: 15px;
+      font-weight: 750;
+      letter-spacing: -.03em;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 11px;
+      color: var(--night);
+      background: var(--mint);
+    }
+
+    .brand-mark svg { width: 19px; height: 19px; }
+
+    .nav-link {
+      color: #d3dddf;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .nav-link:hover { color: var(--mint); }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: center;
+      gap: 64px;
+      min-height: 490px;
+      padding-block: 72px 86px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 22px;
+      color: var(--mint);
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 22px;
+      height: 1px;
+      background: currentColor;
+      content: "";
+    }
+
+    h1 {
+      max-width: 620px;
+      margin: 0;
+      font-size: clamp(44px, 6vw, 72px);
+      font-weight: 650;
+      letter-spacing: -.075em;
+      line-height: .99;
+    }
+
+    h1 span { color: var(--mint); }
+
+    .intro {
+      max-width: 470px;
+      margin: 24px 0 30px;
+      color: #bbc8cb;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .primary-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      border-radius: 9px;
+      color: var(--night);
+      background: var(--mint);
+      font-size: 13px;
+      font-weight: 750;
+      text-decoration: none;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .primary-link:hover { transform: translateY(-2px); background: #d8ff91; }
+    .primary-link svg { width: 16px; height: 16px; }
+
+    .route-art {
+      position: relative;
+      display: grid;
+      min-height: 300px;
+      place-items: center;
+    }
+
+    .route-art::before {
+      position: absolute;
+      width: 290px;
+      height: 290px;
+      border: 1px solid rgba(201,242,119,.18);
+      border-radius: 50%;
+      box-shadow: 0 0 0 34px rgba(201,242,119,.035), 0 0 0 70px rgba(201,242,119,.025);
+      content: "";
+    }
+
+    .map-card {
+      position: relative;
+      width: min(330px, 90%);
+      height: 260px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 20px;
+      background-color: #1b2a32;
+      background-image:
+        linear-gradient(30deg, transparent 47%, rgba(255,255,255,.08) 48%, rgba(255,255,255,.08) 49%, transparent 50%),
+        linear-gradient(120deg, transparent 39%, rgba(255,255,255,.07) 40%, rgba(255,255,255,.07) 41%, transparent 42%),
+        linear-gradient(75deg, transparent 68%, rgba(255,255,255,.06) 69%, rgba(255,255,255,.06) 70%, transparent 71%),
+        linear-gradient(160deg, transparent 23%, rgba(255,255,255,.06) 24%, rgba(255,255,255,.06) 25%, transparent 26%);
+      box-shadow: 0 28px 80px rgba(0,0,0,.28);
+      transform: rotate(3deg);
+    }
+
+    .map-card::before {
+      position: absolute;
+      top: -50px;
+      left: 44%;
+      width: 5px;
+      height: 390px;
+      border: 2px solid #c9f277;
+      border-left: 0;
+      border-radius: 50%;
+      content: "";
+      transform: rotate(29deg);
+    }
+
+    .map-card::after {
+      position: absolute;
+      top: 87px;
+      left: 42%;
+      width: 13px;
+      height: 13px;
+      border: 3px solid #1b2a32;
+      border-radius: 50%;
+      background: var(--mint);
+      box-shadow: 0 0 0 5px rgba(201,242,119,.2);
+      content: "";
+    }
+
+    .map-label {
+      position: absolute;
+      top: 19px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #e4ece8;
+      font-size: 11px;
+      font-weight: 650;
+    }
+
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); }
+
+    .map-stop {
+      position: absolute;
+      right: 27px;
+      bottom: 23px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 13px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 11px;
+      background: rgba(15,26,34,.86);
+      color: white;
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    .bus-icon {
+      display: grid;
+      width: 29px;
+      height: 29px;
+      place-items: center;
+      border-radius: 8px;
+      color: var(--night);
+      background: var(--mint);
+      font-size: 15px;
+    }
+
+    .map-stop strong { display: block; font-size: 11px; }
+
+    .apps-section { padding: 88px 0 94px; }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 31px;
+    }
+
+    .section-kicker {
+      margin: 0 0 11px;
+      color: #78878a;
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 43px);
+      font-weight: 650;
+      letter-spacing: -.06em;
+      line-height: 1.08;
+    }
+
+    .section-note {
+      max-width: 300px;
+      margin: 0 0 3px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .app-card {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: var(--card);
+      box-shadow: 0 5px 20px rgba(23,37,45,.035);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .app-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 35px rgba(23,37,45,.09);
+    }
+
+    .app-preview {
+      position: relative;
+      display: grid;
+      height: 190px;
+      overflow: hidden;
+      place-items: center;
+      background: #e8f0ed;
+    }
+
+    .app-card:nth-child(2) .app-preview { background: #e8eef5; }
+    .app-card:nth-child(3) .app-preview { background: #f5e9e0; }
+
+    .app-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .35s ease;
+    }
+
+    .app-card:hover .app-preview img { transform: scale(1.035); }
+
+    .app-location {
+      position: absolute;
+      top: 13px;
+      left: 13px;
+      padding: 7px 10px;
+      border: 1px solid rgba(255,255,255,.72);
+      border-radius: 99px;
+      background: rgba(255,255,255,.88);
+      color: #33434a;
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: .02em;
+      backdrop-filter: blur(8px);
+    }
+
+    .app-info {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 21px 20px 19px;
+    }
+
+    .app-index {
+      margin: 0 0 9px;
+      color: #879398;
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: .12em;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -.04em;
+      line-height: 1.25;
+    }
+
+    .app-description {
+      min-height: 66px;
+      margin: 10px 0 17px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: auto 0 20px;
+    }
+
+    .feature-list span {
+      padding: 6px 9px;
+      border-radius: 6px;
+      background: #f1f4ef;
+      color: #536269;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .store-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 43px;
+      padding: 0 13px;
+      border: 1px solid #dfe5df;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: border-color .2s ease, background .2s ease;
+    }
+
+    .store-link:hover { border-color: #b1cf7a; background: #f8fbed; }
+    .store-link span:last-child { color: #67777d; font-size: 16px; }
+
+    .footer {
+      padding: 22px 0;
+      border-top: 1px solid var(--line);
+      color: #718087;
+      font-size: 11px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .footer p { margin: 0; line-height: 1.6; }
+    .footer a { color: #3e5158; font-weight: 650; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 850px) {
+      .hero-content { gap: 25px; }
+      .app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .app-card:last-child { grid-column: 1 / -1; }
+      .app-card:last-child .app-preview { height: 220px; }
+    }
+
+    @media (max-width: 600px) {
+      .wrap { width: min(100% - 36px, 440px); }
+      .hero { min-height: auto; }
+      .topbar { height: 69px; }
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 13px;
+        padding-block: 60px 53px;
+      }
+      h1 { font-size: clamp(46px, 13vw, 64px); }
+      .intro { max-width: 370px; margin-block: 19px 24px; font-size: 14px; }
+      .route-art { min-height: 235px; margin-top: 15px; }
+      .route-art::before { width: 210px; height: 210px; }
+      .map-card { width: min(290px, 87%); height: 205px; }
+      .apps-section { padding: 62px 0 66px; }
+      .section-heading { align-items: start; flex-direction: column; gap: 12px; margin-bottom: 23px; }
+      .section-note { max-width: 340px; }
+      .app-grid { grid-template-columns: 1fr; gap: 14px; }
+      .app-card:last-child { grid-column: auto; }
+      .app-card .app-preview, .app-card:last-child .app-preview { height: 190px; }
+      .app-description { min-height: 0; }
+      .footer-inner { align-items: start; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <nav class="topbar" aria-label="Navegación principal">
+        <a class="brand" href="#" aria-label="Driver Hub, inicio">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M5 18V6h5.5a3.5 3.5 0 0 1 0 7H5m7 5 7-12m-5.3 9H20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          driver hub
+        </a>
+        <a class="nav-link" href="#aplicaciones">Mis aplicaciones <span aria-hidden="true">↘</span></a>
+      </nav>
+
+      <div class="hero-content">
+        <div>
+          <p class="eyebrow">Herramientas para conductores de autobús</p>
+          <h1>Sigue cada línea.<br><span>Sin perderte.</span></h1>
+          <p class="intro">Navegación GPS para seguir tus recorridos, localizar líneas y paradas, y consultar avisos durante el servicio.</p>
+          <a class="primary-link" href="#aplicaciones">
+            Explorar aplicaciones
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <div class="route-art" aria-hidden="true">
+          <div class="map-card">
+            <div class="map-label"><span class="live-dot"></span> GPS ACTIVO · LÍNEA EN RUTA</div>
+            <div class="map-stop">
+              <span class="bus-icon">↗</span>
+              <span><strong>Próxima parada</strong>Sigue el recorrido con confianza</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="aplicaciones" class="apps-section">
+    <div class="wrap">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Un mismo lugar, tres herramientas</p>
+          <h2>Diseñadas para<br>el día a día.</h2>
+        </div>
+        <p class="section-note">Elige tu ciudad y encuentra la app que te acompaña en cada servicio.</p>
+      </div>
+
+      <div class="app-grid">
+        <article class="app-card">
+          <div class="app-preview">
+            <img src="https://play-lh.googleusercontent.com/A9tfJ0MPgNORHcOeAytUJKYIij-PZMMY3EtTYZNILTZ4RMwwl0P3aKDOKpQWKXmrXzks5iYHw_z6xuI-om4Qrg=w526-h296" alt="Vista de TMB Driver Assistance App" loading="lazy">
+            <span class="app-location">BARCELONA · TMB</span>
+          </div>
+          <div class="app-info">
+            <p class="app-index">APP 01 / BARCELONA</p>
+            <h3>TMB Driver Assistance</h3>
+            <p class="app-description">Sigue las líneas de autobús de Barcelona con ayuda de navegación GPS y consulta el recorrido y sus paradas.</p>
+            <div class="feature-list"><span>GPS y navegación</span><span>Líneas y paradas</span></div>
+            <a class="store-link" href="https://play.google.com/store/apps/details?id=com.tmbnav.app" target="_blank" rel="noopener noreferrer">
+              <span>Ver en Google Play</span><span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="app-card">
+          <div class="app-preview">
+            <img src="https://play-lh.googleusercontent.com/zSPBetZpRiWqEelg1JCRFMagqVsY9NMT8rVdBL3CfiWOiRmh28amFMO8un73UY2St-fyjSG2MRRNCclivpBRqA=w526-h296" alt="Vista de BCN Bus Nav" loading="lazy">
+            <span class="app-location">BARCELONA · AMB</span>
+          </div>
+          <div class="app-info">
+            <p class="app-index">APP 02 / BARCELONA</p>
+            <h3>BCN Bus Nav</h3>
+            <p class="app-description">Asistencia en ruta para conductores: consulta líneas y paradas, y mantente al tanto de los avisos del servicio.</p>
+            <div class="feature-list"><span>GPS en ruta</span><span>Paradas y avisos</span></div>
+            <a class="store-link" href="https://play.google.com/store/apps/details?id=com.jrs.bcnbusnav" target="_blank" rel="noopener noreferrer">
+              <span>Ver en Google Play</span><span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="app-card">
+          <div class="app-preview">
+            <img src="https://play-lh.googleusercontent.com/nIMsL_VsgxfUpGy_TyRx4FZqMHp95GozeUNcsxcacHT9aoWVc0b_v7ML-40eg5hHea9XwyKMFivz9rRBb-zbaIk=w526-h296" alt="Vista de Driver Bus Madrid" loading="lazy">
+            <span class="app-location">MADRID</span>
+          </div>
+          <div class="app-info">
+            <p class="app-index">APP 03 / MADRID</p>
+            <h3>Driver Bus Madrid</h3>
+            <p class="app-description">Sigue los recorridos de Madrid, localiza paradas y consulta avisos e incidencias del servicio.</p>
+            <div class="feature-list"><span>Rutas y paradas</span><span>Avisos de servicio</span></div>
+            <a class="store-link" href="https://play.google.com/store/apps/details?id=com.driverbusmadrid.app" target="_blank" rel="noopener noreferrer">
+              <span>Ver en Google Play</span><span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <p>© <span id="year">2026</span> Driver Hub · Aplicaciones independientes para conductores.</p>
+      <p>Las apps no están afiliadas a las entidades de transporte mencionadas.</p>
+    </div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
