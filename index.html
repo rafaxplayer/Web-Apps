@@ -432,6 +432,68 @@
     .store-link:focus-visible { outline: 3px solid #91b947; outline-offset: 3px; }
     .store-link span:last-child { color: var(--ink); font-size: 18px; }
 
+    .contact-section {
+      padding: 28px 0 76px;
+    }
+
+    .contact-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      padding: 42px 48px;
+      border-radius: 18px;
+      background: var(--night);
+      color: #f7faf6;
+    }
+
+    .contact-copy { max-width: 650px; }
+
+    .contact-kicker {
+      margin: 0 0 11px;
+      color: var(--mint);
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .contact-title {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 650;
+      letter-spacing: -.055em;
+      line-height: 1.15;
+    }
+
+    .contact-description {
+      margin: 12px 0 0;
+      color: #bbc8cb;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 50px;
+      padding: 0 19px;
+      border: 1px solid var(--mint);
+      border-radius: 8px;
+      background: var(--mint);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 750;
+      text-decoration: none;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .contact-link:hover { transform: translateY(-2px); background: #b6e663; }
+    .contact-link:focus-visible { outline: 3px solid #91b947; outline-offset: 3px; }
+
     .footer {
       padding: 22px 0;
       border-top: 1px solid var(--line);
@@ -471,6 +533,8 @@
       .route-art::before { width: 210px; height: 210px; }
       .map-card { width: min(290px, 87%); height: 205px; }
       .apps-section { padding: 62px 0 66px; }
+      .contact-section { padding: 12px 0 54px; }
+      .contact-content { align-items: flex-start; flex-direction: column; gap: 22px; padding: 29px 24px; }
       .section-heading { align-items: start; flex-direction: column; gap: 12px; margin-bottom: 23px; }
       .section-note { max-width: 340px; }
       .app-grid { gap: 12px; }
@@ -547,7 +611,7 @@
           <div class="app-info">
             <h3 class="app-title">TMB Nav</h3>
             <p class="app-description">Sigue las líneas de autobús de Barcelona con ayuda de navegación GPS y consulta el recorrido y sus paradas.</p>
-            <div class="feature-list"><span>GPS y navegación</span><span>Líneas y paradas</span></div>
+            <div class="feature-list"><span>GPS y navegación</span><span>Líneas y paradas TMB Barcela</span></div>
             <a class="store-link" href="https://play.google.com/store/apps/details?id=com.tmbnav.app" target="_blank" rel="noopener noreferrer">
               <span>Ver en Google Play</span><span aria-hidden="true">↗</span>
             </a>
@@ -562,7 +626,7 @@
           <div class="app-info">
             <h3 class="app-title">BCN Bus Nav</h3>
             <p class="app-description">Asistencia en ruta para conductores: consulta líneas y paradas, y mantente al tanto de los avisos del servicio.</p>
-            <div class="feature-list"><span>GPS en ruta</span><span>Paradas y avisos</span></div>
+            <div class="feature-list"><span>GPS en ruta</span><span>Paradas y lineas de barcelona de todas las empresas excepto TMB</span></div>
             <a class="store-link" href="https://play.google.com/store/apps/details?id=com.jrs.bcnbusnav" target="_blank" rel="noopener noreferrer">
               <span>Ver en Google Play</span><span aria-hidden="true">↗</span>
             </a>
@@ -577,7 +641,7 @@
           <div class="app-info">
             <h3 class="app-title">Driver Bus Madrid</h3>
             <p class="app-description">Sigue los recorridos de Madrid, localiza paradas y consulta avisos e incidencias del servicio.</p>
-            <div class="feature-list"><span>Rutas y paradas</span><span>Avisos de servicio</span></div>
+            <div class="feature-list"><span>Lineas y paradas</span><span>EMT de Madrid</span></div>
             <a class="store-link" href="https://play.google.com/store/apps/details?id=com.driverbusmadrid.app" target="_blank" rel="noopener noreferrer">
               <span>Ver en Google Play</span><span aria-hidden="true">↗</span>
             </a>
@@ -587,10 +651,25 @@
     </div>
   </main>
 
+  <section class="contact-section" aria-labelledby="contact-title">
+    <div class="wrap">
+      <div class="contact-content">
+        <div class="contact-copy">
+          <p class="contact-kicker">Tu experiencia cuenta</p>
+          <h2 class="contact-title" id="contact-title">¿Ya eres usuario?</h2>
+          <p class="contact-description">Si tienes sugerencias para mejorar una app o alguna duda, contacta conmigo. Tu opinión ayuda a que sigamos mejorando.</p>
+        </div>
+        <a class="contact-link" href="mailto:jrs.info72@gmail.com?subject=Sugerencias%20para%20mejorar%20la%20app">
+          Contactar por correo <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="wrap footer-inner">
       <p>© <span id="year">2026</span> Rafax Apps · Aplicaciones independientes para conductores.</p>
-      <p><a href="mailto:jrs.info72@gmail.com?subject=Sugerencias%20y%20contacto">Sugerencias y contacto</a> · Las apps no están afiliadas a las entidades de transporte mencionadas.</p>
+      <p>Las apps no están afiliadas a las entidades de transporte mencionadas.</p>
     </div>
   </footer>
   <script>
